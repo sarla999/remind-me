@@ -33,6 +33,6 @@ class index
 
 
 $page = new index();
-//$page->add('还北京银行贷款',1800,'2015-07-15','每月15号还');
-$page->lists();
+$page->add('还北京银行贷款',1800,'2015-07-15','每月15号还');
+//$page->lists();
 
