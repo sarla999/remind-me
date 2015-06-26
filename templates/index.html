@@ -1,4 +1,6 @@
 <!DOCTYPE HTML>
+<html>
+<meta charset="UTF-8">
 <head><title>Remindme ÌáĞÑÎÒ</title>
 <style type="text/css">
 table.gridtable {
@@ -42,7 +44,8 @@ table.gridtable td {
 	
 	foreach($data as $var){
 		$add_time = date("Y-m-d",$var['add_date']);
-		echo '<tr><td>'.$var["id"].'</td><td>'.$var["title"].'</td><td>'.$var["sum"].'</td><td>'.$var["refund_date"].'</td><td>'.$var["desc"].'</td><td>'.$add_time.'</td></tr>';
+		$refund_date = date("Y-m-d",$var['refund_date']);
+		echo '<tr><td>'.$var["id"].'</td><td>'.$var["title"].'</td><td>'.$var["sum"].'</td><td>'.$refund_date.'</td><td>'.$var["desc"].'</td><td>'.$add_time.'</td></tr>';
 
 
 	}
