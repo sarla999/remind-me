@@ -81,4 +81,16 @@ class remind
 	}
 
 
+	//插入数据
+	public function insert_data($title,$sum,$refund_date,$desc)
+	{
+		$add_date = time();
+		$sql = "INSERT INTO $this->table_name (`title`,`sum`,`refund_date`,`desc`,`add_date`) VALUES('$title',$sum,$refund_date,'$desc',$add_date)";
+		$status = $this->conn->query($sql);
+
+	}
+	
+
+
+
 }
