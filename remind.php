@@ -73,7 +73,7 @@ class remind
 	//查询所有数据
 	public function get_all()
 	{
-		$sql = "SELECT * FROM $this->table_name";
+		$sql = "SELECT * FROM $this->table_name ORDER by refund_date ASC";
 		$res = $this->conn->query($sql);
 		$data = $res->fetchall();
 		return $data;
