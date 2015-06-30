@@ -89,6 +89,26 @@ class remind
 		$status = $this->conn->query($sql);
 
 	}
+
+	//删除数据
+	public function	del_byid($id)
+	{
+		$id = intval($id);
+		$sql = "DELETE FROM $this->table_name WHERE id=$id";
+		$status = $this->conn->query($sql);
+
+	}
+
+
+	//更新数据
+	public function update($id,$title,$sum,$refund_date,$desc,$add_date)
+	{
+		$update_date = time();
+		$refund_date = strtotime($refund_date);
+		$add_date = strtotime($add_date);
+		$sql = "UPDATE $this->table_name SET `title`='$title' , `sum`=$sum , `refund_date`='$refund_date', `desc`='$desc',`add_date`=$add_date ,`update_date`=$update_date WHERE `id`=$id";
+		$status = $this->conn->query($sql);
+	}
 	
 
 

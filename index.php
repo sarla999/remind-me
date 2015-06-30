@@ -17,6 +17,22 @@ class index
 
 	public function lists()
 	{
+		if(isset($_POST['action']) && $_POST['action']== 'add' ){
+			$this->add($_POST['title'],$_POST['sum'],$_POST['refunddate'],$_POST['desc']);	
+		}
+
+		if(isset($_POST['action']) && $_POST['action'] == 'delete'){
+		
+			$this->remindObj->del_byid($_POST['id']);
+		}
+
+		if(isset($_POST['action']) && $_POST['action'] == 'edit'){
+
+			$this->remindObj->update($_POST['id'],$_POST['title'],$_POST['sum'],$_POST['refunddate'],$_POST['desc'],$_POST['addtime']);
+
+		}
+
+
 		$data = $this->remindObj->get_all();
 		include(self::TPL.'index.html');
 
@@ -33,8 +49,5 @@ class index
 
 
 $page = new index();
-//$page->add('还北京银行贷款',1800,'2015-07-15','每月15号还');
-//$page->add('还华夏银行',2900,'2015-07-20','每月20号还');
-//$page->add('还工行公积金',4054,'2015-07-20','每月20号还');
 $page->lists();
 
