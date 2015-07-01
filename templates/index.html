@@ -88,6 +88,9 @@
   			data: {'action':action,'title':title,'sum':sum,'refunddate':refund_date,'desc':desc},
   			dataType: 'json',
   			success: function(data){
+				if(data){
+						location.reload();
+					}	
   			}
 		});
 		

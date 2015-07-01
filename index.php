@@ -18,7 +18,9 @@ class index
 	public function lists()
 	{
 		if(isset($_POST['action']) && $_POST['action']== 'add' ){
-			$this->add($_POST['title'],$_POST['sum'],$_POST['refunddate'],$_POST['desc']);	
+			$status = $this->add($_POST['title'],$_POST['sum'],$_POST['refunddate'],$_POST['desc']);	
+			echo json_encode($status);
+			exit;
 		}
 
 		if(isset($_POST['action']) && $_POST['action'] == 'delete'){
@@ -42,7 +44,8 @@ class index
 	public function add($title,$sum,$refund_date,$desc)
 	{
 		$refund_date = strtotime($refund_date);
-		$this->remindObj->insert_data($title,$sum,$refund_date,$desc);
+		$status = $this->remindObj->insert_data($title,$sum,$refund_date,$desc);
+		return $status;
 	}
 
 }
@@ -50,4 +53,3 @@ class index
 
 $page = new index();
 $page->lists();
-

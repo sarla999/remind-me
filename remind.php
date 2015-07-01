@@ -63,7 +63,9 @@ class remind
 	{
 		$add_date = time();
 		$sql = "INSERT INTO $this->table_name (`title`,`sum`,`refund_date`,`desc`,`add_date`) VALUES('refund credit card',50,201582,'CMBchina',$add_date)";
-		$this->conn->query($sql);
+		$res = $this->conn->exec($sql);
+		return $res;
+
 		//echo 'init data ok!\n';
 
 
@@ -86,8 +88,8 @@ class remind
 	{
 		$add_date = time();
 		$sql = "INSERT INTO $this->table_name (`title`,`sum`,`refund_date`,`desc`,`add_date`) VALUES('$title',$sum,$refund_date,'$desc',$add_date)";
-		$status = $this->conn->query($sql);
-
+		$res = $this->conn->exec($sql);
+		return $res;
 	}
 
 	//删除数据
@@ -95,7 +97,8 @@ class remind
 	{
 		$id = intval($id);
 		$sql = "DELETE FROM $this->table_name WHERE id=$id";
-		$status = $this->conn->query($sql);
+		$res = $this->conn->exec($sql);
+		return $res;
 
 	}
 
@@ -107,7 +110,8 @@ class remind
 		$refund_date = strtotime($refund_date);
 		$add_date = strtotime($add_date);
 		$sql = "UPDATE $this->table_name SET `title`='$title' , `sum`=$sum , `refund_date`='$refund_date', `desc`='$desc',`add_date`=$add_date ,`update_date`=$update_date WHERE `id`=$id";
-		$status = $this->conn->query($sql);
+		$res = $this->conn->exec($sql);
+		return $res;
 	}
 	
 
