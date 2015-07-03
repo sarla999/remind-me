@@ -94,7 +94,6 @@ class core_db extends PDO
 	* @param int $type
 	* @param int $returnType 1 默认（sql错误时返回空数组，没查到数据时返回false） ，2 （sql错误时返回 false，没查到数据时返回空数组）
 	* @return array|bool|mixed
-	* @auth zhangjie
 	*/
 	public function getRows($sql,$type=PDO::FETCH_ASSOC, $returnType = 1)
 	{
