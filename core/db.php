@@ -8,15 +8,15 @@ error_reporting(E_ALL);
 class core_db extends PDO
 {
 	//子类可覆盖属性
-	protected $dbName = 'club';
-    protected $tableName = 'bbs_activity_official_account';
-    protected $dbType = 'sqlite';
+	protected $dbName = 'phpmyadmin';
+	protected $tableName = 'pma_history';
+	protected $dbType = 'sqlite';
 	protected $orderByField = 'id';
 	protected $fileds = '*';
 	
 	//定义私有属性
 	private static $_instance = null;
-    private $dsh ;
+	private $dsh ;
 	private $sql ;
 
 	//公共属性
@@ -25,9 +25,9 @@ class core_db extends PDO
 	//定义mysql属性
 	private static $mysql = array(
 
-								'host'=>'192.168.0.42',
-								'user'=>'',
-								'password'=>'',
+								'host'=>'localhost',
+								'user'=>'root',
+								'password'=>'416andsrd',
 								'port'=>'3306',
 
 								);
@@ -78,33 +78,64 @@ class core_db extends PDO
 	
 	/**
 	 * 根据查询条件返回一条记录
-	 * @param int $returnType 参见 $this->row() 注释
-	 * @return array|mixed
+	 * @param int $returnType
+	 * @return array
 	 */
-	public function find($returnType = 1)
+	public function find()
 	{
-		$this->sql = 'SELECT '.$this->fileds.' FROM '.$this->tableName . $this->condition();
-		return $this->getRows($this->sql, PDO::FETCH_ASSOC, $returnType);
+		$this->sql = 'SELECT '.$this->fileds.' FROM '.$this->tableName. $this->condition();
+		$sth = $this->dsh->query($this->sql);
+
+		if($sth){
+			$res = $sth->fetch(PDO::FETCH_ASSOC);
+			return $res === false ? array() : $res ;
+		}else{
+			$this->msg = $this->errorInfo();
+			return false;
+		}
 	}
 
 
 	/**
-	* 执行查询并返回数据
-	* @param $sql
-	* @param int $type
-	* @param int $returnType 1 默认（sql错误时返回空数组，没查到数据时返回false） ，2 （sql错误时返回 false，没查到数据时返回空数组）
-	* @return array|bool|mixed
-	*/
-	public function getRows($sql,$type=PDO::FETCH_ASSOC, $returnType = 1)
+	* 插入一条数据
+	* @return array
+	**/
+	public function insert(array $data)
 	{
-		$this->sql = $sql;
-		$sth = $this->dsh->query($this->sql);
-		if (!$sth) {
-			$this->msg = $this->errorInfo();
-			return $returnType == 1 ? array() : false;
+		$data = $this->build_insert_data($data);
+		print_r($data);	
+
+
+	}
+
+
+	/**
+	* 构造插入收据数组 
+	* @return array
+	**/
+	private function build_insert_data(array $data)
+	{
+		$returnData = array();
+		foreach($data as $key=>$val){
+			if(is_string($key)){
+				if(in_array($key,$this->fields)){
+					if(is_null($val)){
+						array_push($returnData,sprintf("`%s`=NULL",$key));
+					}else{
+						array_push($returnData,sprintf("`%s`=%s",$key,$this->dsh->quote($val)));
+					}
+				}else{
+					continue;
+				}	
+			}elseif(is_int($key) && is_int($val)){
+				array_push($returnData,sprintf("`%d`=%d",$key,$val));
+			}else{
+				array_push($returnData,sprintf("%s=%s",$key,$this->dsh->quote($val)));
+			}
+
 		}
-		$res = $sth->fetch($type);
-		return ($returnType == 1 || !empty($res)) ? $res : array();
+
+		return $returnData;
 	}
 
 
@@ -121,13 +152,23 @@ class core_db extends PDO
 
 class remind extends core_db{
 
-	protected $dbName = "club";	
+	protected $dbName = "phpmyadmin";	
 	protected $dbType = "mysql";
+	protected $fields = array(
+				'id',
+				'username',
+				'db',
+				'table',
+				'timevalue',
+				'sqlquery',
+				7,
+				);
 
-	
+
 	public function __construct(){
 		$this->init_db();
-		print_r($this->find());
+		$data = array('username'=>'shiyili','db'=>'aaa','talbe'=>'ddddee','timevalue'=>123456,'sqlquery'=>'nimenhaoma',7=>8);	
+		print_r($this->insert($data));
 
 	}
 
