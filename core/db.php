@@ -8,11 +8,11 @@ error_reporting(E_ALL);
 class core_db extends PDO
 {
 	//子类可覆盖属性
-	protected $dbName = 'phpmyadmin';
-	protected $tableName = 'pma_history';
+	protected $dbName = 'club';
+	protected $tableName = 'bbs_activity_official_account';
 	protected $dbType = 'sqlite';
 	protected $orderByField = 'id';
-	protected $fileds = '*';
+	protected $fields = '*';
 	
 	//定义私有属性
 	private static $_instance = null;
@@ -25,9 +25,9 @@ class core_db extends PDO
 	//定义mysql属性
 	private static $mysql = array(
 
-								'host'=>'localhost',
-								'user'=>'root',
-								'password'=>'416andsrd',
+								'host'=>'192.168.0.42',
+								'user'=>'web',
+								'password'=>'',
 								'port'=>'3306',
 
 								);
@@ -53,7 +53,7 @@ class core_db extends PDO
                     $this->dsh = new PDO($dsn);
                         if($this->dsh){
                             //$this->init_table();
-                            //$this->init_data();
+                            //$this->init_data()r
                         }else{
                             die('Create DB error');
                         }
@@ -62,13 +62,17 @@ class core_db extends PDO
 
                 if(empty(self::$_intance)){
 					try{
+
 						$dsn = 'mysql:host='.self::$mysql['host'].';port='.self::$mysql['port'].';dbname='.$this->dbName.';charset=utf8';
 						$this->dsh = new PDO($dsn,self::$mysql['user'],self::$mysql['password']);
 
 						}catch (PDOException $e){
-						die('Database error');
+
+							die('Database error');
 						}
 
+					}else{
+						return $this->dsh;
 					}
          }
 
@@ -86,24 +90,38 @@ class core_db extends PDO
 		$this->sql = 'SELECT '.$this->fileds.' FROM '.$this->tableName. $this->condition();
 		$sth = $this->dsh->query($this->sql);
 
-		if($sth){
-			$res = $sth->fetch(PDO::FETCH_ASSOC);
-			return $res === false ? array() : $res ;
-		}else{
+		if(!$sth){
 			$this->msg = $this->errorInfo();
 			return false;
+		}else{
+			$res = $sth->fetch(PDO::FETCH_ASSOC);
+			return $res === false ? array() : $res ;
 		}
 	}
 
 
 	/**
 	* 插入一条数据
-	* @return array
+	* @return int
 	**/
 	public function insert(array $data)
 	{
-		$data = $this->build_insert_data($data);
-		print_r($data);	
+		$this->sql  = sprintf('INSERT INTO %s SET %s' , $this->tableName , implode(',',$this->build_insert_data($data)));
+		if(!$this->dsh->query($this->sql)){
+			$this->msg = $this->dsh->errorInfo();
+			return false;
+		}
+		return $this->dsh->lastInsertId();
+	}
+
+
+	/**
+	* 删除一条数据
+	* @return int
+	**/
+	public function delete()
+	{
+
 
 
 	}
@@ -117,29 +135,27 @@ class core_db extends PDO
 	{
 		$returnData = array();
 		foreach($data as $key=>$val){
-			if(is_string($key)){
-				if(in_array($key,$this->fields)){
-					if(is_null($val)){
-						array_push($returnData,sprintf("`%s`=NULL",$key));
-					}else{
-						array_push($returnData,sprintf("`%s`=%s",$key,$this->dsh->quote($val)));
-					}
+			if(in_array($key,$this->fields)){
+				if(empty($val)){
+					array_push($returnData,sprintf('`%s`=NULL',$key));	
+				}elseif(is_string($val)){
+					array_push($returnData,sprintf('`%s`=%s',$key,$this->dsh->quote($val)));
+				}elseif(is_int($val)){
+					array_push($returnData,sprintf('`%s`=%d',$key,$val));
 				}else{
-					continue;
-				}	
-			}elseif(is_int($key) && is_int($val)){
-				array_push($returnData,sprintf("`%d`=%d",$key,$val));
+					array_push($returnData,sprintf('`%s`=%s',$key,$this->dsh->quote($val)));
+				}	 
+
 			}else{
-				array_push($returnData,sprintf("%s=%s",$key,$this->dsh->quote($val)));
+				continue;
 			}
 
 		}
-
 		return $returnData;
 	}
 
 
-	//
+	//设置查询条件
 	public function condition()
 	{
 	}
@@ -152,22 +168,22 @@ class core_db extends PDO
 
 class remind extends core_db{
 
-	protected $dbName = "phpmyadmin";	
+	protected $dbName = "club";	
 	protected $dbType = "mysql";
 	protected $fields = array(
 				'id',
-				'username',
-				'db',
-				'table',
-				'timevalue',
-				'sqlquery',
-				7,
+				'uid',
+				'realname',
+				'adminid',
+				'dateline',
 				);
 
 
 	public function __construct(){
-		$this->init_db();
-		$data = array('username'=>'shiyili','db'=>'aaa','talbe'=>'ddddee','timevalue'=>123456,'sqlquery'=>'nimenhaoma',7=>8);	
+		parent::__construct();
+		//$a = $this->find();
+		//print_r($a);
+		$data = array('uid'=>9527,'realname'=>'','adminid'=>234,'dateline'=>6677);	
 		print_r($this->insert($data));
 
 	}
