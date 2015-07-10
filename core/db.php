@@ -13,6 +13,7 @@ class core_db extends PDO
 	protected $dbType = 'sqlite';
 	protected $orderByField = 'id';
 	protected $fields = '*';
+	protected $where ;
 	
 	//定义私有属性
 	private static $_instance = null;
@@ -87,7 +88,11 @@ class core_db extends PDO
 	 */
 	public function find()
 	{
-		$this->sql = 'SELECT '.$this->fileds.' FROM '.$this->tableName. $this->condition();
+		if(is_array($this->fields)){
+			$this->fields = '`'.implode('`,`',$this->fields).'`';	
+		}	
+
+		$this->sql = 'SELECT '.$this->fields.' FROM '.$this->tableName. $this->where;
 		$sth = $this->dsh->query($this->sql);
 
 		if(!$sth){
@@ -106,7 +111,7 @@ class core_db extends PDO
 	**/
 	public function insert(array $data)
 	{
-		$this->sql  = sprintf('INSERT INTO %s SET %s' , $this->tableName , implode(',',$this->build_insert_data($data)));
+		$this->sql  = sprintf('INSERT INTO %s SET %s' , $this->tableName , implode(',',$this->build_query_data($data)));
 		if(!$this->dsh->query($this->sql)){
 			$this->msg = $this->dsh->errorInfo();
 			return false;
@@ -121,7 +126,14 @@ class core_db extends PDO
 	**/
 	public function delete()
 	{
+		$this->sql = sprintf('DELETE FROM %s %s', $this->tableName, $this->where);
+		$res = $this->dsh->exec($this->sql);
 
+		if($res===false){
+			$this->msg = $this->dsh->errorInfo();	
+		}
+
+		return $res;		
 
 
 	}
@@ -131,7 +143,7 @@ class core_db extends PDO
 	* 构造插入收据数组 
 	* @return array
 	**/
-	private function build_insert_data(array $data)
+	private function build_query_data(array $data)
 	{
 		$returnData = array();
 		foreach($data as $key=>$val){
@@ -154,6 +166,39 @@ class core_db extends PDO
 		return $returnData;
 	}
 
+
+	/**
+	* 设置查询条件
+	* @param mixed $input
+	**/
+	public function where($input)
+	{
+		if(is_string($input) && !empty($input)){
+
+			$this->where = ' WHERE '.$input;
+		}else{
+			$this->where = null ;
+		}	
+
+		return $this->where ;
+	}
+
+
+	/**
+	* 更新数据库
+	* @param array 
+	**/
+	public function update(array $data)
+	{
+		$this->sql = sprintf('UPDATE %s SET %s %s ',$this->tableName, implode(',',$this->build_query_data($data)), $this->where);
+		$res = $this->dsh->exec($this->sql);
+		
+		if($res===false){
+			$this->msg = $this->dsh->errorInfo();	
+		}
+
+		return $res;		
+	}
 
 	//设置查询条件
 	public function condition()
@@ -181,10 +226,16 @@ class remind extends core_db{
 
 	public function __construct(){
 		parent::__construct();
-		//$a = $this->find();
-		//print_r($a);
-		$data = array('uid'=>9527,'realname'=>'','adminid'=>234,'dateline'=>6677);	
+		$this->where("id = 12");
+		//$a = $this->delete();
+		//var_dump($a);
+		/*for($i=0;$i<6;$i++){
+		$data = array('uid'=>9527,'realname'=>'test'.$i,'adminid'=>234,'dateline'=>6677);	
 		print_r($this->insert($data));
+
+		}*/
+		$data = array('uid'=>9527,'realname'=>'shiyili','adminid'=>567,'dateline'=>8877);	
+		print_r($this->update($data));
 
 	}
 
