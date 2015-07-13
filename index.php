@@ -35,8 +35,8 @@ class index
 		}
 
 
-		$data = $this->remindObj->get_all();
-		include(self::TPL.'index.html');
+		//$data = $this->remindObj->get_all();
+		include(self::TPL.'test.html');
 
 	}
 
