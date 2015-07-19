@@ -8,15 +8,16 @@ error_reporting(E_ALL);
 
 		protected function __construct($appname)
 		{
-			$this->appname = $appname;
+			self::$appname = $appname;
 			
 			//定义系统常量
-			define('APP_NAME',$this->appname);
+			define('APP_NAME',self::$appname);
 			define('ROOT_PATH',dirname(dirname(__FILE__)));
 			define('APP_PATH',ROOT_PATH.'/app');
+			define('TPL',ROOT_PATH.'/templates');
 
 			//应用程序自动加载方法
-			spl_autoload_register(array('self','appAutoload'));
+			spl_autoload_register(array('self','sysAutoload'));
 
 		}
 		
@@ -26,15 +27,33 @@ error_reporting(E_ALL);
 		}
 
 
-		public static function appAutoload($classname){
+		private function sysAutoload($classname){
 
-			$fh = ROOT_PATH.'/app/'.str_replace('_','/',strtolower($classname)).'.php';	
-			if(is_file($fh)){
-				include_once($fh);
-				return ;
+			$pathArr = array('core','libs'); //注册系统目录
+
+			$prePath = explode('_',$classname);
+
+			if(in_array(strtolower($prePath[0]),$pathArr)){
+				$fh = ROOT_PATH.'/'.str_replace('_','/',strtolower($classname)).'.php';
+				if(is_file($fh)){
+					include_once($fh);
+				}
+			}else{
+				$fh = ROOT_PATH.'/app/'.str_replace('_','/',strtolower($classname)).'.php';	
+				if(is_file($fh)){
+					include_once($fh);
+					return;
+				}
+
 			}
-			$fh = APP_PATH.'/'.str_replace('_','/',strtolower($classname)).'.php';
-				include_once($fh);
+
+		}
+		
+
+		public static function appRun()
+		{
+			$classname = core_route::parse_request();			
+			return new $classname();
 
 		}
 

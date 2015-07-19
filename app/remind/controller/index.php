@@ -5,10 +5,11 @@
 	
 		public function __construct()
 		{
-			echo 'wow amazing';
+			core_view::views('test.html');
 
 		}
 
+		
 
 
 

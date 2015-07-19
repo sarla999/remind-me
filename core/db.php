@@ -3,8 +3,6 @@
 *数据库基础操作类
 *author shiyili
 **/
-error_reporting(E_ALL);
-
 class core_db extends PDO
 {
 	//子类可覆盖属性
@@ -200,9 +198,10 @@ class core_db extends PDO
 		return $res;		
 	}
 
-	//设置查询条件
-	public function condition()
+	//重置查询条件
+	public function resetwhere()
 	{
+		return $this->where = '';
 	}
 
 
