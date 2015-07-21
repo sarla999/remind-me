@@ -1,7 +1,6 @@
 <?php
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 //系统配置文件
-
 	class core_config
 	{
 		private static $appname;
