@@ -3,7 +3,6 @@
 *模板解析
 *
 */
-
 class core_templates
 {
 	public function __construct()
