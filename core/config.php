@@ -42,7 +42,6 @@ error_reporting(E_ALL);
 				$fh = ROOT_PATH.'/app/'.str_replace('_','/',strtolower($classname)).'.php';	
 				if(is_file($fh)){
 					include_once($fh);
-					return;
 				}
 
 			}
@@ -52,8 +51,15 @@ error_reporting(E_ALL);
 
 		public static function appRun()
 		{
-			$classname = core_route::parse_request();			
-			return new $classname();
+			$classaction = core_route::parse_request();			
+			
+			$classname = $classaction['class'];
+			$action = $classaction['func'];
+			
+			$classObj = new $classname();
+			return $classObj->$action();
+			
+			
 
 		}
 

@@ -4,7 +4,7 @@
 *
 */
 
-core_templates
+class core_templates
 {
 	public function __construct()
 	{
@@ -13,15 +13,19 @@ core_templates
 	}	
 
 
-	public static function views($tplname)
+	public static function view($tplname)
 	{
 
-		
+		$fh = ROOT_PATH.'/templates/'.$tplname;
+		if(is_file($fh)){
+			include_once($fh);
+			return ;
+		}else{
+			echo 'template is not exists';
+		}
 
 
 	}
-
-
 
 
 

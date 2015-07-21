@@ -6,7 +6,7 @@
 class core_route{
 	
 	private static $request = array();
-	private static $classname ;
+	private static $action = array() ;
 
 	public function __construct(){
 
@@ -42,20 +42,25 @@ class core_route{
 		if($requestArr){
 			if(isset($requestArr['modules']))
 			{
-				self::$classname = $requestArr['modules'].'_controller_';
-
-			}
-			if(isset($requestArr['action']))
-			{
-				self::$classname .= $requestArr['action'];
+				self::$action['class'] = APP_NAME.'_controller_'.$requestArr['modules'];
 
 			}else{
-				self::$classname .='index';
+				self::$action['class'] = APP_NAME.'_controller_'.APP_NAME;
+
+			}
+
+			if(isset($requestArr['action']))
+			{
+				self::$action['func'] = $requestArr['action'];
+
+			}else{
+				self::$action['func'] = 'index';
 			}
 
 		}
+		
 
-		return self::$classname;
+		return self::$action;
 
 	}
 
