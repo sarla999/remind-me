@@ -209,38 +209,3 @@ class core_db extends PDO
 
 }
 
-
-class remind extends core_db{
-
-	protected $dbName = "club";	
-	protected $dbType = "mysql";
-	protected $fields = array(
-				'id',
-				'uid',
-				'realname',
-				'adminid',
-				'dateline',
-				);
-
-
-	public function __construct(){
-		parent::__construct();
-		$this->where("id = 12");
-		//$a = $this->delete();
-		//var_dump($a);
-		/*for($i=0;$i<6;$i++){
-		$data = array('uid'=>9527,'realname'=>'test'.$i,'adminid'=>234,'dateline'=>6677);	
-		print_r($this->insert($data));
-
-		}*/
-		$data = array('uid'=>9527,'realname'=>'shiyili','adminid'=>567,'dateline'=>8877);	
-		print_r($this->update($data));
-
-	}
-
-
-
-
-}
-
-new remind();
