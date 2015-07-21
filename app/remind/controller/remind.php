@@ -1,5 +1,4 @@
 <?php
-
 	class remind_controller_remind
 	{
 	
