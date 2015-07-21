@@ -6,6 +6,8 @@
 		{
 			//core_templates::view('test.html');
 			//echo 'this is a test index';
+			echo 'aaa';
+			$dabaObj = new remind_models_data_remind();
 
 		}
 		
