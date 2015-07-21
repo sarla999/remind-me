@@ -3,6 +3,7 @@
 * 路由程序
 * @ return array
 **/
+
 class core_route{
 	
 	private static $request = array();
