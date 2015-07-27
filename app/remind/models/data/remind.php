@@ -1,14 +1,18 @@
 <?php
-
+error_reporting(E_ALL);
 class remind_models_data_remind
 {
+	private $daoObj;
 
 	public function __construct()
 	{
+		$this->daoObj = new remind_models_dao_remind();
 
-		echo 'this is get data from remind data';
+	}
 
 
+	public function getData(){
+		return $this->daoObj->getData();
 	}
 
 

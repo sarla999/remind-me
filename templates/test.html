@@ -54,9 +54,35 @@
     <h1>你好，世界！</h1>
 	</div>
 
+
+<p>kankan xiaoguo</p>
+<button id='btn1'>隐藏</button>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="./static/js/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./static/js/bootstrap.js"></script>
+
+
+
+<script>
+	$(document).ready(function(){
+
+		$("#btn1").click(function(){
+
+			$("p").toggle(500);
+
+			var bs = $("p").attr("status");
+			if(!bs){
+				$("p").attr('status','yincang');
+				}else{
+				alert(bs));	
+
+				}
+			//$("#btn1").attr("status","yincang");
+		});
+		});
+</script>
+
   </body>
 </html>
