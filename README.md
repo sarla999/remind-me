@@ -16,7 +16,7 @@ remind me todo somethins
 
 
 
-###b.收藏夹功能实现（是否使用新框架laravel）
+###b.收藏夹功能实现（空间不支持laravel）
 	1.公共------意见反馈
 		a.数据表设计
 			so.common.feedback
