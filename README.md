@@ -26,7 +26,7 @@ remind me todo somethins
 	2.收藏功能
 		a.用户数据表设计
 			sso.common.member
-			id(p key) username passwd regtime ip logintime status 
+			id(p key) username phone passwd regtime ip logintime status 
 		b.收藏数据表设计
 		c.标签数据表设计
 			sso.common.tags
