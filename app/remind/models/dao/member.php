@@ -3,6 +3,16 @@
 class remind_models_dao_member extends core_db{
         protected $dbName = 'sso';
         protected $tableName = 'common_member';
+	protected $fields = array(
+		'id',
+		'username',
+		'phone',
+		'passwd',
+		'regtime',
+		'ip',
+		'logintime',
+		'status',
+	);
 
 	public function __construct(){
 		parent::__construct();
@@ -12,12 +22,12 @@ class remind_models_dao_member extends core_db{
 	public function newUser($username,$phone,$passwd){
 
 		$filedsArr['logintime'] = $filedsArr['regtime'] = $_SERVER['REQUEST_TIME'];
-		$filedsArr['ip'] = $SERVER['REMOTE_ADDR'];
+		$filedsArr['ip'] = $_SERVER['REMOTE_ADDR'];
 		$filedsArr['username'] = $username;
 		$filedsArr['passwd'] = $passwd;
 		$filedsArr['status'] = 1;
 
-		retrun $this->insert($filedsArr);
+		return $this->insert($filedsArr);
 		
 
 	}	
