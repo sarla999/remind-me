@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 	
 		public function __construct()
 		{
-			$this->dataObj = new remind_models_dao_member();
+			$this->dataObj = new remind_models_data_member();
 
 		}
 		
@@ -21,13 +21,30 @@ error_reporting(E_ALL);
 
 		public function adduser()
 		{
-			echo 'adduser';
+			if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['passwd']) && !empty($_POST['passwd'])){
+
+				if(libs_tools::checkEmail($_POST['username'])){
+					if($this->dataObj->checkUser($_POST['username'])){
+						$username=$_POST['username'];
+						return $this->dataObj->adduser($username,$_POST['passwd']);
+						}else{
+							echo '邮箱己被注册，请更换';
+						}
+					}else{
+						echo '邮箱格式错误';
+					}
+			}else{
+				echo '缺少参数';
+			}	
+		}
+
+
+		public function checkUsername()
+		{
 			$username = 'shiyili@eyou.com';
-			$phone = '123444';
-			$passwd = '112233';
-			$resdata = $this->dataObj->newUser($username,$phone,$passwd);
-			print_r($resdata);
-			
+			$res = $this->dataObj->checkUsername($username);
+
+			print_r($res);
 
 
 		}

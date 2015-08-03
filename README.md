@@ -18,17 +18,17 @@ remind me todo somethins
 
 ###b.收藏夹功能实现（空间不支持laravel）
 	1.公共------意见反馈
-		a.数据表设计
+		a.数据表设计(done)
 			sso.common.feedback
 			id(主键) username useragent time ip comment status(处理和未处理)
 		b.功能实现
 		c.页面嵌套
 	2.收藏功能
-		a.用户数据表设计
+		a.用户数据表设计(done)
 			sso.common.member
 			id(p key) username phone passwd regtime ip logintime status 
 		b.收藏数据表设计
-		c.标签数据表设计
+		c.标签数据表设计(done)
 			sso.common.tags
 			id(p key) tagname father addtime
 		d.登录功能实现

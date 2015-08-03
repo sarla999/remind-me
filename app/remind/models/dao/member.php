@@ -3,6 +3,7 @@
 class remind_models_dao_member extends core_db{
         protected $dbName = 'sso';
         protected $tableName = 'common_member';
+		protected $dbType = 'mysql';
 	protected $fields = array(
 		'id',
 		'username',
@@ -52,6 +53,14 @@ class remind_models_dao_member extends core_db{
 	public function getAllUser(){
 		echo 'view all user info';
 
+	}
+
+	//检测用户名是否己被注册
+	public function checkUsername($username){
+		$this->resetwhere();
+		$this->where("username = '$username'");	
+		$resdata = $this->find();
+		return $resdata;
 	}
 
 
