@@ -19,13 +19,13 @@ class remind_models_dao_member extends core_db{
 		parent::__construct();
 	}
 
-
-	public function newUser($username,$phone,$passwd){
-
+	//添加新用户 
+	public function addUser($username,$passwd){
 		$filedsArr['logintime'] = $filedsArr['regtime'] = $_SERVER['REQUEST_TIME'];
-		$filedsArr['ip'] = $_SERVER['REMOTE_ADDR'];
+		$filedsArr['ip'] = libs_tools::getIp();
 		$filedsArr['username'] = $username;
 		$filedsArr['passwd'] = $passwd;
+		$filedsArr['phone'] = '';
 		$filedsArr['status'] = 1;
 
 		return $this->insert($filedsArr);
@@ -33,9 +33,12 @@ class remind_models_dao_member extends core_db{
 
 	}	
 
-	public function checkUser(){
-
-		echo 'user and pass is ok or not';
+	//检测用户名与密码是否正确
+	public function checkUser($username,$passwd){
+		$this->resetwhere();
+		$this->where("username = '$username' AND passwd = '$passwd'");	
+		$resdata = $this->find();
+		return $resdata;		
 
 	}
 
@@ -49,9 +52,11 @@ class remind_models_dao_member extends core_db{
 
 	}
 
-
+	//获得所有注册用户信息
 	public function getAllUser(){
-		echo 'view all user info';
+		$this->resetwhere();
+		$resdata = $this->findAll();
+		return $resdata;	
 
 	}
 

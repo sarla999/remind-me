@@ -14,6 +14,14 @@ class remind_models_data_member
 	}
 
 
+	//添加新用户 
+	public function addUser($username,$passwd)
+	{
+		return $this->daoObj->addUser($username,$passwd);
+
+	}
+
+	//检测用户是否己注册
 	public function checkUsername($username)
 	{
 		return $this->daoObj->checkUsername($username);
@@ -21,5 +29,19 @@ class remind_models_data_member
 	}	
 
 
+	//获取所有注册用户信息
+	public function getAlluser()
+	{
+		return $this->daoObj->getAlluser();
+
+	}
+
+
+	//检测用户名与密码是否正确
+	public function checkUser($username,$passwd)
+	{
+		return $this->daoObj->checkUser($username,$passwd);
+
+	}
 
 }

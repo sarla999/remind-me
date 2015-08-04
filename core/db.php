@@ -6,9 +6,9 @@
 class core_db extends PDO
 {
 	//子类可覆盖属性
-	protected $dbName = 'club';
-	protected $tableName = 'bbs_activity_official_account';
-	protected $dbType = 'sqlite';
+	protected $dbName = 'sso';
+	protected $tableName = 'common_member';
+	protected $dbType = 'mysql';
 	protected $orderByField = 'id';
 	protected $fields = '*';
 	protected $where ;
@@ -24,9 +24,9 @@ class core_db extends PDO
 	//定义mysql属性
 	private static $mysql = array(
 
-								'host'=>'192.168.0.42',
+								'host'=>'127.0.0.1',
 								'user'=>'web',
-								'password'=>'',
+								'password'=>'yimaoqiche',
 								'port'=>'3306',
 
 								);
@@ -87,10 +87,10 @@ class core_db extends PDO
 	public function find()
 	{
 		if(is_array($this->fields)){
-			$this->fields = '`'.implode('`,`',$this->fields).'`';	
+			$fields = '`'.implode('`,`',$this->fields).'`';	
 		}	
 
-		$this->sql = 'SELECT '.$this->fields.' FROM '.$this->tableName. $this->where;
+		$this->sql = 'SELECT '.$fields.' FROM '.$this->tableName. $this->where;
 		$sth = $this->dsh->query($this->sql);
 
 		if(!$sth){
@@ -101,6 +101,31 @@ class core_db extends PDO
 			return $res === false ? array() : $res ;
 		}
 	}
+
+
+	 /**
+     * 根据查询条件返回所有记录
+     * @param int $returnType
+     * @return array
+     */
+    public function findAll()
+    {
+        if(is_array($this->fields)){
+            $fields = '`'.implode('`,`',$this->fields).'`';
+        }
+
+        $this->sql = 'SELECT '.$fields.' FROM '.$this->tableName. $this->where;
+        $sth = $this->dsh->query($this->sql);
+
+        if(!$sth){
+            $this->msg = $this->errorInfo();
+            return false;
+        }else{
+            $res = $sth->fetchAll(PDO::FETCH_ASSOC);
+            return $res === false ? array() : $res ;
+        }
+    }
+
 
 
 	/**

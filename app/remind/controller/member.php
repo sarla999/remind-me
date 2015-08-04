@@ -21,14 +21,16 @@ error_reporting(E_ALL);
 
 		public function adduser()
 		{
-			if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['passwd']) && !empty($_POST['passwd'])){
+			//if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['passwd']) && !empty($_POST['passwd'])){
+			if(isset($_GET['username']) && !empty($_GET['username']) && isset($_GET['passwd']) && !empty($_GET['passwd'])){
 
-				if(libs_tools::checkEmail($_POST['username'])){
-					if($this->dataObj->checkUser($_POST['username'])){
-						$username=$_POST['username'];
-						return $this->dataObj->adduser($username,$_POST['passwd']);
+				if(libs_tools::checkEmail($_GET['username'])){
+					if($this->dataObj->checkUsername($_GET['username'])){
+						echo '邮箱己被注册，请更换';
 						}else{
-							echo '邮箱己被注册，请更换';
+							$username=$_GET['username'];
+							$resdata =  $this->dataObj->adduser($username,$_GET['passwd']);
+							echo $resdata;
 						}
 					}else{
 						echo '邮箱格式错误';
@@ -44,12 +46,25 @@ error_reporting(E_ALL);
 			$username = 'shiyili@eyou.com';
 			$res = $this->dataObj->checkUsername($username);
 
-			print_r($res);
+		}
 
+
+		public function checkUser()
+		{
+			$username = 'shiyili@eyou.com';
+			$passwd = 112233;
+			$res = $this->dataObj->checkUser($username,$passwd);
+			print_r($res);
 
 		}
 
 		
+
+		public function getall(){
+
+			$res = $this->dataObj->getAlluser();
+			print_r($res);
+			}
 
 
 
