@@ -12,7 +12,7 @@ class remind_models_dao_member extends core_db{
 		'regtime',
 		'ip',
 		'logintime',
-		'status',
+		'status', //1为正常4为禁止
 	);
 
 	public function __construct(){
@@ -42,14 +42,26 @@ class remind_models_dao_member extends core_db{
 
 	}
 
-	public function updatePass(){
-
-		echo 'user update passwd';
+	//更新用户密码
+	public function updatePasswd($uid,$passwd){
+		$this->resetwhere();
+		$this->where("id=$uid");
+		return $this->update(array('passwd'=>$passwd));
 	}
 
-	public function delUser(){
-		echo 'delete user';
+	//更新用户名称
+	public function updateUsername($uid,$username){
+		$this->resetwhere();
+		$this->where("id=$uid");
+		return $this->update(array('username'=>$username));
+	}
 
+	//禁止某用户
+	public function bannedUser($uid){
+		$this->resetwhere();
+		$this->where("id=$uid");	
+		$status = 4;
+		return $this->update(array('status'=>$status));
 	}
 
 	//获得所有注册用户信息

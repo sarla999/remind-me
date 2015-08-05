@@ -66,7 +66,27 @@ error_reporting(E_ALL);
 			print_r($res);
 			}
 
+		public function jzyh()
+			{
 
+
+			$res = $this->dataObj->bannedUser(3);
+			print_r($res);
+
+			}
+
+
+		public function gxmm(){
+			$res = $this->dataObj->updatePasswd(3,'admin9999');
+			print_r($res);
+
+			}
+
+		public function gxmc(){
+			$res = $this->dataObj->updateUsername(3,'shiyili@mail.com');
+			print_r($res);
+
+			}
 
 	}
 
