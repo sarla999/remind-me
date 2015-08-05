@@ -25,8 +25,8 @@ class core_db extends PDO
 	private static $mysql = array(
 
 								'host'=>'127.0.0.1',
-								'user'=>'web',
-								'password'=>'yimaoqiche',
+								'user'=>'root',
+								'password'=>'',
 								'port'=>'3306',
 
 								);
