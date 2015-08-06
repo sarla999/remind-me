@@ -46,7 +46,8 @@ class libs_tools
 		for($i=0;$i<$keylen;$i++){
 			$resdata[$i] = $resstr[$i];
 		}
-		
+			
+			
 		list($resdata[2],$resdata[$keylen-3]) = array($resdata[$keylen-3],$resdata[2]);
 		list($resdata[4],$resdata[$keylen-5]) = array($resdata[$keylen-5],$resdata[4]);
 		list($resdata[$m-1],$resdata[$m+1]) = array($resdata[$m+1],$resdata[$m-1]);
