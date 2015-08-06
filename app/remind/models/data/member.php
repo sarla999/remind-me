@@ -58,10 +58,19 @@ class remind_models_data_member
 
 
 	//注册用户cookie
-	public function regCookie()
+	public function regCookie($encryptname)
 	{
-
+		setcookie('SSOLOGINID',$encryptname,COOKIE_EXPIRE,COOKIE_DOMAIN);
 		
 	}
+
+
+	//读取用户cookie
+	public function getCookie()
+	{
+		echo $_COOKIE['SSOLOGINID'];
+	}
+
+
 
 }
