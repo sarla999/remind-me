@@ -14,6 +14,8 @@
 			define('ROOT_PATH',dirname(dirname(__FILE__)));
 			define('APP_PATH',ROOT_PATH.'/app');
 			define('TPL',ROOT_PATH.'/templates');
+			define('COOKIE_EXPIRE',time()+3600);
+			define('COOKIE_DOMAIN','.test.com');
 
 			//应用程序自动加载方法
 			spl_autoload_register(array('self','sysAutoload'));
