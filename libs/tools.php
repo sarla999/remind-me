@@ -71,6 +71,22 @@ class libs_tools
 		return base64_decode($encrypt);
 
 	}
+		
+	//过滤xss
+	public static function filterXss($input)
+	{
+		if(!$input){
+			return false;
+		}else{
+
+			$str = strip_tags(trim($input));
+			$str = htmlspecialchars($str);
+			$str = addslashes($str);
+			
+			return $str;
+		}
+
+	}
 	
 
 

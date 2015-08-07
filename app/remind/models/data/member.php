@@ -42,6 +42,14 @@ class remind_models_data_member
 	{
 		return $this->daoObj->bannedUser($uid);
 	}
+		
+	//用户退出登录
+	public function loginOut()
+	{
+
+		setcookie('SSOLOGINID','',time()-3600);	
+
+	}
 
 
 	//更新用户密码

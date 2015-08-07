@@ -18,6 +18,7 @@
 			
 			$ada = new remind_models_data_member();
 			$ada->regCookie($str);
+			//$ada->loginOut();
 			echo '<br>---';
 			$cookie = $ada->getCookie();
 			if($cookie){
@@ -27,6 +28,13 @@
 			echo 'who are you';
 
 			}
+
+			echo '<pre>';
+			$str2 = '<img src="http://www.baidu.com">';
+
+			$strs = libs_tools::filterXss($str2);
+
+			var_dump($strs);
 
 
 		}
