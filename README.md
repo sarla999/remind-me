@@ -31,7 +31,7 @@ remind me todo somethins
 		c.标签数据表设计(done)
 			sso.common.tags
 			id(p key) tagname father addtime
-		d.登录功能实现
+		d.登录功能实现(done)
 		c.收藏功能实现
 		e.页面嵌套
 
