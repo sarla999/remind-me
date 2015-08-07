@@ -50,12 +50,13 @@ class libs_tools
 		list($resdata[2],$resdata[$keylen-3]) = array($resdata[$keylen-3],$resdata[2]);
 		list($resdata[4],$resdata[$keylen-5]) = array($resdata[$keylen-5],$resdata[4]);
 		list($resdata[$m-1],$resdata[$m+1]) = array($resdata[$m+1],$resdata[$m-1]);
-		return  implode("",$resdata);
+		return  base64_encode(implode("",$resdata));
 	}
 
 	//解密
 	public static function decrypt($enkey)
 	{
+		$enkey = base64_decode($enkey);
 		$keylen = strlen(trim($enkey));	
 		$m = intval($keylen/2);
 		

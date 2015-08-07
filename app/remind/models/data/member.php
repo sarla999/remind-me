@@ -68,7 +68,11 @@ class remind_models_data_member
 	//读取用户cookie
 	public function getCookie()
 	{
-		echo $_COOKIE['SSOLOGINID'];
+		if(isset($_COOKIE['SSOLOGINID'])){
+			return $_COOKIE['SSOLOGINID'];
+		}else{
+			return false;
+		}
 	}
 
 
