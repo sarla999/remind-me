@@ -5,7 +5,11 @@
 class remind_controller_feedback
 {
 
+	public function __construct()
+	{
+		$this->dataObj = new remind_models_data_feedback();
 
+	}
 
 	public function index()
 	{
@@ -15,7 +19,7 @@ class remind_controller_feedback
 	}
 
 
-	public function addFeedback()
+	public function addfeedback()
 	{
 		 if(isset($_GET['username']) && !empty($_GET['username']) && isset($_GET['comment']) && !empty($_GET['comment'])){
 
