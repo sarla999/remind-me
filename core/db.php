@@ -171,7 +171,8 @@ class core_db extends PDO
 		$returnData = array();
 		foreach($data as $key=>$val){
 			if(in_array($key,$this->fields)){
-				if(empty($val)){
+				var_dump($val);
+				if(empty($val) && $val!=0){
 					array_push($returnData,sprintf('`%s`=NULL',$key));	
 				}elseif(is_string($val)){
 					array_push($returnData,sprintf('`%s`=%s',$key,$this->dsh->quote($val)));
@@ -186,6 +187,7 @@ class core_db extends PDO
 			}
 
 		}
+		print_r($returnData);
 		return $returnData;
 	}
 
