@@ -21,7 +21,7 @@ remind me todo somethins
 		a.数据表设计(done)
 			sso.common.feedback
 			id(主键) username useragent time ip comment status(处理和未处理)
-		b.功能实现
+		b.功能实现(done)
 		c.页面嵌套
 	2.收藏功能
 		a.用户数据表设计(done)
