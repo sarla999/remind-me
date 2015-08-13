@@ -27,12 +27,13 @@ remind me todo somethins
 		a.用户数据表设计(done)
 			sso.common.member
 			id(p key) username phone passwd regtime ip logintime status 
-		b.收藏数据表设计
+		b.收藏数据表设计(inprocess)
+		
 		c.标签数据表设计(done)
 			sso.common.tags
-			id(p key) tagname father addtime
+			id(p key) tagname father reference addtime
 		d.登录功能实现(done)
-		c.收藏功能实现
+		c.收藏功能实现(inprocess)
 		e.页面嵌套
 
 
