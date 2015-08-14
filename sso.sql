@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (armv7l)
+-- MySQL dump 10.13  Distrib 5.1.73, for redhat-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: sso
 -- ------------------------------------------------------
--- Server version	5.5.44-0+deb7u1
+-- Server version	5.1.73-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `common_feedback` (
   `comment` varchar(300) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `common_feedback` (
 
 LOCK TABLES `common_feedback` WRITE;
 /*!40000 ALTER TABLE `common_feedback` DISABLE KEYS */;
+INSERT INTO `common_feedback` VALUES (1,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'woshini',1),(2,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'woshini',1),(3,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'woshini',0),(4,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'woshini',1),(5,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'woshini',0),(6,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'ninini',0),(7,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'alert(7788)',0),(8,'shiyili','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36',0,192168,'alert(7788)',0);
 /*!40000 ALTER TABLE `common_feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +61,7 @@ CREATE TABLE `common_member` (
   `logintime` int(10) unsigned NOT NULL,
   `status` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +70,7 @@ CREATE TABLE `common_member` (
 
 LOCK TABLES `common_member` WRITE;
 /*!40000 ALTER TABLE `common_member` DISABLE KEYS */;
-INSERT INTO `common_member` VALUES (1,'shiyili@eyou.com',NULL,'112233',1438534344,'192.168.2.10',1438534344,1),(2,'shiyili@eyou.com',NULL,'112233',1438534345,'192.168.2.10',1438534345,1);
+INSERT INTO `common_member` VALUES (1,'shiyili@eyou.com',NULL,'112233',1438534344,'192.168.2.10',1438534344,1),(2,'shiyili@eyou.com',NULL,'112233',1438534345,'192.168.2.10',1438534345,1),(3,'shiyili@mail.com',NULL,'admin9999',1438576074,'192.168.20.223',1438576074,4),(4,'shiyili@eyou.com',NULL,'4321',1438685153,'192.168.20.223',1438685153,1),(5,'shiyili@eyou.com',NULL,'4321',1438685172,'192.168.20.223',1438685172,1),(6,'shiyili3@eyou.com',NULL,'4321',1438685307,'192.168.20.223',1438685307,1),(7,'shiyili4@eyou.com',NULL,'4321',1438685373,'192.168.20.223',1438685373,1),(8,'wangming@kaixin.com',NULL,'ganniniang',1438745804,'192.168.20.223',1438745804,1);
 /*!40000 ALTER TABLE `common_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,9 +85,10 @@ CREATE TABLE `common_tags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tagname` char(15) NOT NULL,
   `father` varchar(50) NOT NULL,
+  `reference` int(10) unsigned NOT NULL COMMENT '引用次数',
   `addtime` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +97,7 @@ CREATE TABLE `common_tags` (
 
 LOCK TABLES `common_tags` WRITE;
 /*!40000 ALTER TABLE `common_tags` DISABLE KEYS */;
+INSERT INTO `common_tags` VALUES (1,'shiyili@eyou.co','333',1,1439483667),(2,'333','shiyili@eyou.com',1,1439483812),(3,'333','shiyili@eyou.com',1,1439484082),(4,'333','shiyili@eyou.com',1,1439484175),(5,'33388888','shiyili555@eyou.com',3,1439484698),(6,'2222','shiyili555@eyou.com',0,1439486320);
 /*!40000 ALTER TABLE `common_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-03  0:53:55
+-- Dump completed on 2015-08-14 19:05:45

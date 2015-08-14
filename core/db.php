@@ -231,6 +231,21 @@ class core_db extends PDO
 		return $this->where = '';
 	}
 
+	//计数器
+	public function counter($fieldname)
+	{
+		$this->sql = sprintf('UPDATE %s SET %s %s',$this->tableName,"$fieldname="."$fieldname".'+1',$this->where);
+		echo $this->sql;die;
+		$res = $this->dsh-exec($this->sql);
+		
+		if($res===false){
+			$this->msg = $this->dsh->errorInfo();
+		}
+
+		return $res;
+
+	}
+
 
 
 

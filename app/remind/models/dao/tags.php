@@ -54,7 +54,7 @@ class remind_models_dao_tags extends core_db{
 	{
 		$this->resetwhere();
 		$this->where("tagname=$tagname");
-        return $this->update(array('reference'=>'reference+1'));
+        return $this->counter($this->fields[3]);
 		
 	}
 
