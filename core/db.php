@@ -171,7 +171,6 @@ class core_db extends PDO
 		$returnData = array();
 		foreach($data as $key=>$val){
 			if(in_array($key,$this->fields)){
-				var_dump($val);
 				if(empty($val) && $val!=0){
 					array_push($returnData,sprintf('`%s`=NULL',$key));	
 				}elseif(is_string($val)){
@@ -187,7 +186,6 @@ class core_db extends PDO
 			}
 
 		}
-		print_r($returnData);
 		return $returnData;
 	}
 
@@ -234,15 +232,16 @@ class core_db extends PDO
 	//计数器
 	public function counter($fieldname)
 	{
-		$this->sql = sprintf('UPDATE %s SET %s %s',$this->tableName,"$fieldname="."$fieldname".'+1',$this->where);
-		echo $this->sql;die;
-		$res = $this->dsh-exec($this->sql);
+		$this->sql = sprintf('UPDATE %s SET %s %s',$this->tableName,"$fieldname = "."$fieldname+1",$this->where);
+
+		$res = $this->dsh->query($this->sql);
 		
 		if($res===false){
 			$this->msg = $this->dsh->errorInfo();
 		}
 
 		return $res;
+		
 
 	}
 
