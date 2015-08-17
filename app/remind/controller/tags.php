@@ -43,7 +43,8 @@ class remind_controller_tags
 		//判断该tag是否己有，己有tag reference+1 else add new tag
 		if($status)
 		{
-			return $this->dataObj->updateTagRef($tagname);
+			$this->dataObj->updateTagRef($tagname);
+			return $status;
 		}else{
 
 			return $this->dataObj->addTag($tagname,$_GET['username']);
