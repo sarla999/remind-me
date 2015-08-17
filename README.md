@@ -28,7 +28,7 @@ remind me todo somethins
 			sso.common.member
 			id(p key) username phone passwd regtime ip logintime status 
 		b.收藏数据表设计(inprocess)
-		
+			id(p key) uid name location tags notes publish status addtime updatetime
 		c.标签数据表设计(done)
 			sso.common.tags
 			id(p key) tagname father reference addtime
