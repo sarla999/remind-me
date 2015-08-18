@@ -16,6 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bookmark`
+--
+
+DROP TABLE IF EXISTS `bookmark`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookmark` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `tags` char(15) NOT NULL,
+  `notes` varchar(100) DEFAULT NULL,
+  `public` tinyint(3) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL,
+  `addtime` int(10) unsigned NOT NULL,
+  `updatetime` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookmark`
+--
+
+LOCK TABLES `bookmark` WRITE;
+/*!40000 ALTER TABLE `bookmark` DISABLE KEYS */;
+INSERT INTO `bookmark` VALUES (1,0,'','','','',0,1,1439807947,1439807947),(2,0,'','','','',0,1,1439807977,1439807977),(3,0,'','','','',0,1,1439808254,1439808254),(4,2,'hello','www.emao.com','fun','good',1,1,1439808329,1439808329),(5,2,'hello','www.emao.com','fun','good',1,1,1439808369,1439808369),(6,2,'alert(\\\'ookk\\\')','www.emao.com','fun','good',1,1,1439808449,1439808449);
+/*!40000 ALTER TABLE `bookmark` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `common_feedback`
 --
 
@@ -88,7 +120,7 @@ CREATE TABLE `common_tags` (
   `reference` int(10) unsigned NOT NULL COMMENT '引用次数',
   `addtime` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +129,7 @@ CREATE TABLE `common_tags` (
 
 LOCK TABLES `common_tags` WRITE;
 /*!40000 ALTER TABLE `common_tags` DISABLE KEYS */;
-INSERT INTO `common_tags` VALUES (1,'shiyili@eyou.co','333',1,1439483667),(2,'333','shiyili@eyou.com',1,1439483812),(3,'333','shiyili@eyou.com',1,1439484082),(4,'333','shiyili@eyou.com',1,1439484175),(5,'33388888','shiyili555@eyou.com',3,1439484698),(6,'2222','shiyili555@eyou.com',0,1439486320);
+INSERT INTO `common_tags` VALUES (1,'shiyili@eyou.co','333',1,1439483667),(2,'333','shiyili@eyou.com',3,1439483812),(3,'333','shiyili@eyou.com',3,1439484082),(4,'333','shiyili@eyou.com',3,1439484175),(5,'33388888','shiyili555@eyou.com',3,1439484698),(6,'2222','shiyili555@eyou.com',15,1439486320),(7,'22224','shiyili555@eyou.com',12,1439794167),(8,'222245','shiyili555@eyou.com',4,1439795264),(9,'222246','shiyili555@eyou.com',6,1439795416),(10,'222247','shiyili555@eyou.com',2,1439795516);
 /*!40000 ALTER TABLE `common_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -110,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-14 19:05:45
+-- Dump completed on 2015-08-18 10:00:48
