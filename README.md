@@ -35,6 +35,11 @@ remind me todo somethins
 		d.登录功能实现(done)
 		c.收藏功能实现(inprocess)
 		e.页面嵌套
+	3.推荐功能（用户可以推荐好的网站）
+		a.数据表设计
+		b.功能实现
+		c.页面嵌套
+		
 
 
 
