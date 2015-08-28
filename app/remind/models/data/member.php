@@ -83,6 +83,33 @@ class remind_models_data_member
 		}
 	}
 
+	//获得用户登录信息
+	public function checkLogin()
+	{
+		if($this->getCookie()){
+			$cookieinfo = $this->getCookie();
+			return explode('&',libs_tools::decrypt($cookieinfo));
+		}else{
+
+			return array();
+		}
+
+	}
+
+
+	//检测用户是否己登录如未登录，跳转至登录页
+	public function needLogin()
+	{
+		if($this->checkLogin()){
+			return $this->checkLogin();
+		}
+		else{
+			header("Location:login.php");
+			return ;
+		}
+
+	}
+
 
 
 }
